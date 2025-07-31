@@ -1,0 +1,7 @@
+# please add your manage node ip address here
+# This file is used to map hostnames to IP addresses for Ansible inventory
+# Format: <IP address> <hostname> [aliases]
+[centos server]
+192.168.0.0 
+[ubuntu server]
+192.168.0.0 

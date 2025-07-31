@@ -1,0 +1,53 @@
+---
+# Please add the correct path to your Python script and JSON file
+# This playbook is designed to run on all hosts defined in the inventory file
+# It will remove old files, copy new files, execute a Python script, and fetch the generated CSV file
+# Finally, it will send the CSV report via email using a Python script
+
+- name: Get OS details and send report
+  hosts: all
+  gather_facts: yes
+  tasks:
+  - name: Removing OLD python file from remote machine
+    file:
+      path: /home/vagrant/get_os_details.py
+      state: absent
+
+  - name: Removing OLD Json file from remote machine 
+    file:
+      path: /home/vagrant/my_linux_cmd.json  
+      state: absent
+
+  - name: Removing OLD CSV file from remote machine 
+    file:
+      path: /home/vagrant/Daily_report.csv
+      state: absent
+
+  - name: Copying new python script to remote machine
+    copy:
+      src: /home/ishaq/ansible-practice/lect20/get_os_details.py
+      dest: /home/vagrant/get_os_details.py
+      mode: '0755'
+      owner: vagrant
+      group: vagrant
+
+  - name: Copying new JSON file to remote machine
+    copy:
+      src: /home/ishaq/ansible-practice/ansible-project/my_linux_cmd.json
+      dest: /home/vagrant/my_linux_cmd.json
+      owner: vagrant
+      group: vagrant
+
+  - name: Running the python script to get OS details
+    command: python3 /home/vagrant/get_os_details.py
+
+  - name: Fetching csv file from remote machine
+    fetch:
+      src: /home/vagrant/Daily_report.csv
+      dest: /home/ishaq/ansible-practice/csv/Daily_report{{inventory_hostname}}_{{ansible_date_time.minute}}_{{ansible_date_time.second}}.csv
+      flat: yes
+
+  - name: Send the CSV report by email
+    delegate_to: localhost
+    command: python3 /home/ishaq/ansible-practice/ansible_project/send_email.py
+ 
