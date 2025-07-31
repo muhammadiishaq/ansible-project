@@ -96,10 +96,10 @@ A perfect mini DevOps project for learning or for use in production environments
 
 # 🖼 Screenshots
 ## Here’s how the daily system report automation looks in action:
-![Daily Linux System Report](./screentshot/playbook.png)
-![Daily Linux System Report](./screentshot/send.png)
-![Daily Linux System Report](./screentshot/email2.png)
-![Daily Linux System Report](./screentshot/email1.png)
+![Daily Linux System Report](./screenshot/playbook.png)
+![Daily Linux System Report](./screenshot/send.png)
+![Daily Linux System Report](./screenshot/email2.png)
+![Daily Linux System Report](./screenshot/email1.png)
 
 
 ## 📄 License
