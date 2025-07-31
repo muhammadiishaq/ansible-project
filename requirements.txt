@@ -1,0 +1,4 @@
+smtplib
+ssl
+email
+glob2
